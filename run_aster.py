@@ -1,6 +1,24 @@
 import os
+import shutil
+from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv()  # Load environment variables from .env file
+
+# Patch orchestral-ai's image-renderer.js to fix subdirectory image display.
+# The upstream file uses _extractFilename() which strips all path components,
+# causing images saved in subdirectories to return 404. Our patched version
+# preserves the workspace-relative path so any depth is served correctly.
+def _apply_image_renderer_patch():
+    try:
+        import orchestral
+        target = Path(orchestral.__file__).parent / "ui" / "web" / "static" / "js" / "image-renderer.js"
+        patch = Path(__file__).parent / "static" / "js" / "image-renderer.js"
+        if patch.exists() and target.exists():
+            shutil.copy2(patch, target)
+    except Exception as e:
+        print(f"[ASTER] Warning: could not apply image-renderer patch: {e}")
+
+_apply_image_renderer_patch()
 
 from orchestral import Agent
 from orchestral.tools import (
