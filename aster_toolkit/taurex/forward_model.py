@@ -2,6 +2,9 @@ import os
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
+import matplotlib
+matplotlib.use('Agg')  # Non-interactive backend: tool calls may run off the main
+                        # thread, and Tk-based backends are not thread-safe there.
 import matplotlib.pyplot as plt
 from astropy.io import ascii
 import ast
@@ -151,8 +154,6 @@ def generate_taurex_model(
     np.save(os.path.join(base_directory, 'fm_spectrum.npy'), spectrum)
 
     # Plot the spectrum
-    import matplotlib
-    matplotlib.use('Agg')  # Use non-interactive backend
     plt.figure(figsize=(10,6))
     plt.plot(wavelengths, spectrum)
     plt.xlabel('Wavelength (µm)')
