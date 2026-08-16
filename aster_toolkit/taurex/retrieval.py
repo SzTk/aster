@@ -8,6 +8,9 @@ from taurex.stellar import BlackbodyStar
 from taurex.chemistry import TaurexChemistry
 from taurex.chemistry import ConstantGas
 from taurex.contributions import AbsorptionContribution, RayleighContribution, CIAContribution
+import matplotlib
+matplotlib.use('Agg')  # Non-interactive backend: tool calls may run off the main
+                        # thread, and Tk-based backends are not thread-safe there.
 import matplotlib.pyplot as plt
 from taurex.data.spectrum.observed import ObservedSpectrum
 from taurex.optimizer.nestle import NestleOptimizer

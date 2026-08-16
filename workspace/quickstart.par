@@ -1,0 +1,59 @@
+[Global]
+xsec_path = /home/taka/Documents/mygit/aster/workspace/linelists/xsec_R100
+cia_path = /home/taka/Documents/mygit/aster/workspace/linelists/cia
+
+
+[Chemistry]
+chemistry_type = taurex
+fill_gases = H2,He
+ratio = 4.8962e-2
+
+    [[CO2]]
+    gas_type = constant
+    mix_ratio=1.1185e-4
+
+    [[N2]]
+    gas_type = constant
+    mix_ratio = 3.00739e-9
+
+[Temperature]
+profile_type = isothermal
+T = 1265.97764826
+
+[Pressure]
+profile_type = Simple
+atm_min_pressure = 1e-0
+atm_max_pressure = 1e6
+nlayers = 30
+
+[Planet]
+planet_type = Simple
+planet_mass = 1.0
+planet_radius = 0.999430455828
+
+[Star]
+star_type = blackbody
+temperature = 5800
+radius = 0.939
+
+[Model]
+model_type = transmission
+
+    [[Absorption]]
+
+
+
+[Optimizer]
+optimizer = nestle
+num_live_points=100
+method = single
+
+
+[Observation]
+observed_spectrum=/home/taka/Documents/mygit/aster/workspace/spectra/WASP_39_b_3/WASP_39_b_3.11466_4988_4/spectrum.dat
+
+[Fitting]
+planet_radius:fit = True
+planet_radius:bounds = 0.8,2.0
+T:fit = True
+T:bounds = 500.0,2000.0

@@ -27,15 +27,14 @@ from orchestral.tools import (
     ReadFileTool,
     EditFileTool,
     FileSearchTool,
-    WebSearchTool,
     TodoWrite,
     TodoRead,
     DisplayImageTool
 )
 from orchestral.tools.hooks import DangerousCommandHook
 from orchestral.prompts import RICH_UI_SYSTEM_PROMPT
-# from orchestral.llm import Claude
-from orchestral.llm import GPT
+from orchestral.llm import Claude
+# from orchestral.llm import GPT
 
 from aster_toolkit import (
     RunTaurexModelTool,
@@ -57,7 +56,6 @@ tools = [
     ReadFileTool(base_directory=base_directory, show_line_numbers=True),
     EditFileTool(base_directory=base_directory),
     FileSearchTool(base_directory=base_directory),
-    WebSearchTool(),
     TodoRead(),
     TodoWrite(initial_todos='- [ ] Sample todo item'),
     DisplayImageTool,
@@ -83,8 +81,8 @@ with open('aster_system_prompt.md', 'r') as f:
 system_prompt = f'{RICH_UI_SYSTEM_PROMPT}\n\n{aster_prompt}'
 
 agent = Agent(
-    # llm=Claude(),
-    llm=GPT(model="gpt-4.1-mini"),
+    llm=Claude(model="claude-haiku-4-5"),
+    # llm=GPT(model="gpt-4.1-mini"),
     tools=tools,
     tool_hooks=hooks,
     system_prompt=system_prompt

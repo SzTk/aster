@@ -37,6 +37,11 @@ api_testing/
 workspace/*
 !workspace/skills/
 !workspace/skills/**
+!workspace/quickstart.par
+!workspace/linelists/
+workspace/linelists/*
+!workspace/linelists/xsec_R100/
+!workspace/linelists/xsec_R100/**
 downloaded_spectra/
 app/
 

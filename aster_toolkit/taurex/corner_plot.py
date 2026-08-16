@@ -1,4 +1,7 @@
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # Non-interactive backend: tool calls may run off the main
+                        # thread, and Tk-based backends are not thread-safe there.
 import matplotlib.pyplot as plt
 import corner
 import os
@@ -174,9 +177,6 @@ class PlotCornerPosteriors(BaseTool):
 
         # Generate corner plot
         try:
-            import matplotlib
-            matplotlib.use('Agg')  # Use non-interactive backend
-
             fig = corner.corner(
                 plot_samples,
                 weights=weights,
