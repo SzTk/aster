@@ -37,13 +37,15 @@ from orchestral.llm import Claude
 # from orchestral.llm import GPT
 
 from aster_toolkit import (
-    RunTaurexModelTool,
+    RunTaurexTransmissionModelTool,
+    RunTaurexEmissionModelTool,
     SetTaurexPaths,
     SimulateTaurexRetrieval,
-    PlotCornerPosteriors,
+    WriteTaurexParameterFile,
     GetExoplanetParameters,
-    DownloadDataset, 
-    FindExoplanetsByCondition
+    DownloadDataset,
+    FindExoplanetsByCondition,
+    RunFastChemEquilibriumTool,
 )
 
 base_directory = 'workspace'
@@ -62,14 +64,18 @@ tools = [
 
     # TauREx modeling tools
     SetTaurexPaths,
-    RunTaurexModelTool(base_directory=base_directory),
+    RunTaurexTransmissionModelTool(base_directory=base_directory),
+    RunTaurexEmissionModelTool(base_directory=base_directory),
     SimulateTaurexRetrieval(base_directory=base_directory),
-    PlotCornerPosteriors(base_directory=base_directory),
+    WriteTaurexParameterFile(base_directory=base_directory),
 
     # Data acquisition tools
     GetExoplanetParameters(),
     DownloadDataset(base_directory=base_directory),
-    FindExoplanetsByCondition()
+    FindExoplanetsByCondition(base_directory=base_directory),
+
+    # Chemistry tools
+    RunFastChemEquilibriumTool(base_directory=base_directory),
 ]
 
 hooks = [DangerousCommandHook()]
